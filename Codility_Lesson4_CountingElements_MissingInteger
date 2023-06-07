@@ -1,0 +1,26 @@
+// you can use includes, for example:
+// #include <algorithm>
+#include<unordered_set>
+#include<vector>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+int solution(vector<int> &A) 
+{
+    std::unordered_set<int> integers;
+
+    for(int i : A) //insert all elements from A to integers
+    {
+        integers.insert(i);
+    }
+
+    int smallest = 1; 
+
+    while(integers.count(smallest) > 0)
+    {
+        smallest++;
+    }
+
+    return smallest;
+}
