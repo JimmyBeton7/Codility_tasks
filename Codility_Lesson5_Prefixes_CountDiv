@@ -1,0 +1,43 @@
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+int solution(int A, int B, int K) 
+{
+    int mindiv = -1;
+    int maxdiv = -1;
+    int count;
+
+    //find mindiv
+    for(int i = A; i <= B; i++)
+    {
+        if(i % K == 0)
+        {
+            mindiv = i;
+            break;
+        }
+    }
+
+    //find maxdiv
+    for(int i = B; i >= A; i--)
+    {
+        if(i % K == 0)
+        {
+            maxdiv = i;
+            break;
+        }
+    }
+
+    if(mindiv == -1 || maxdiv == -1)
+    {
+        count = 0;
+        return count;
+    }
+    else 
+    {
+        count = ((maxdiv - mindiv) / K) + 1;
+        return count;  
+    }  
+}
