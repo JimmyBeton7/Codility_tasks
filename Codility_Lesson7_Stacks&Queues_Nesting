@@ -1,0 +1,36 @@
+// you can use includes, for example:
+// #include <algorithm>
+#include<stack>
+#include<stack>
+
+int solution(string &S) 
+{
+    if(S == "")
+    {
+        return 1;
+    }
+
+    stack<char> brackets;
+
+    for(int i = 0; i < S.length(); i++)
+    {
+        if(S[i] == '(')
+        {
+            brackets.push(S[i]);
+        }
+        else if(S[i] == ')')
+        {
+            if(brackets.empty() == true || brackets.top() != '(')
+            {
+                return 0;
+            }
+            brackets.pop();
+        }
+    }
+
+    if(brackets.empty() == true)
+    {
+        return 1;
+    }
+    else return 0;
+}
