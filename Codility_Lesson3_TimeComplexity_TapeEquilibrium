@@ -1,0 +1,42 @@
+#include <algorithm>
+#include <vector>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+int solution(vector<int> &A) 
+{
+    int smallest;
+    int part1 = 0;
+    int part2 = 0;
+    int difference = 0;
+
+    vector<int> differences;
+
+    for(int i = 1; i < A.size(); i++)
+    {
+        if(i == 1)
+        {
+            //sum of first part
+            part1 = A[0];
+            for(int j = i; j < A.size(); j++)
+            {
+                part2 += A[j];
+            }
+        }
+        else 
+        {
+            part1 = part1 + A[i-1];
+            part2 = part2 - A[i-1];
+        }
+
+
+        difference = part1 - part2;
+        if(difference < 0) difference = difference * (-1);
+        differences.push_back(difference);
+    }
+
+    sort(differences.begin(), differences.end());
+    smallest = differences[0];
+    return smallest;
+}
