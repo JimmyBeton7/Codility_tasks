@@ -1,0 +1,67 @@
+#include <algorithm>
+#include <stack>
+#include <deque>
+#include <iostream>
+#include <utility>
+#include <vector>
+#include <queue>
+
+int solution(vector<int> &A, vector<int> &B) 
+{
+    deque<pair<int,int>> K1;
+    deque<pair<int,int>> K2;
+
+    for(int i = 0; i < A.size(); i++)
+    {
+        K1.emplace_back(A[i], B[i]);
+    }
+
+    int K1size = K1.size();
+    int K1size_after = -1;
+
+    while(K1size != K1size_after)
+    {
+        K1size = K1.size();
+        while(K1.size() != 1)
+        {
+            pair<int,int> firstK1 = K1.front();
+            K1.pop_front();
+            pair<int,int> secondK1 = K1.front();
+
+            if(firstK1.second == secondK1.second || (firstK1.second == 0 && secondK1.second == 1))
+            {
+                K2.emplace_back(firstK1);
+            }
+            else if(firstK1.second == 1 && secondK1.second == 0)
+            {
+                if(firstK1.first > secondK1.first)
+                {
+                    K1.pop_front(); //delete secondK1
+                    K1.emplace_front(firstK1);
+                }
+                else if(firstK1.first < secondK1.first)
+                {
+                    
+                }
+            }    
+        }
+
+        if(K1.size() == 1)
+        {
+            K2.emplace_back(K1.front());
+            K1.pop_front();
+        }
+
+        while(K2.size() != 0)
+        {
+            K1.emplace_back(K2.front());
+            K2.pop_front();
+        }
+
+        K1size_after = K1.size();
+    }
+
+
+    int alive = K1.size();
+    return alive;
+}
