@@ -1,0 +1,36 @@
+#include <algorithm>
+#include <vector>
+
+int solution(vector<int> &A) 
+{
+    if(A.size() == 2 && A[0] == A[1]) return 1;
+
+    if(A.size() <= 1) return 0;
+
+    int pairs = 0;
+    for(int i = 0; i < A.size() - 1; i++)
+    {
+        int S1 = i;
+        int R1 = A[i];
+        for(int j = i + 1; j < A.size(); j++)
+        {
+            int S2 = j;
+
+            if(S1 == S2) 
+            {
+                pairs++;
+                continue;
+            }
+            int S1S2 = abs(S2 - S1);
+            int R2 = A[j];
+            if(S1S2 < abs(R1 - R2) || S1S2 == R1 + R2 || S1S2 == abs(R1 - R2) || (abs(R1 - R2) < S1S2 && S1S2 < R1 + R2))
+            {
+                pairs++;
+                if(pairs > 10000000) return -1;
+            }
+        }
+    }
+
+    
+    return pairs;
+}
