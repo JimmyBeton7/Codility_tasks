@@ -1,0 +1,21 @@
+// you can use includes, for example:
+#include <algorithm>
+#include <unordered_set>
+#include <vector>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+int solution(vector<int> &A) 
+{
+    unordered_set<int> distinct;
+
+    for(int i : A)
+    {
+        distinct.insert(i);
+    }
+
+    int number = distinct.size();
+
+    return number;
+}
