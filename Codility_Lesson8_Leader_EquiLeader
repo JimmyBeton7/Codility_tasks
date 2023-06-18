@@ -1,0 +1,68 @@
+#include <algorithm>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> &A) 
+{
+    unordered_map<int, int> mapa1;
+    unordered_map<int, int> mapa2;
+    vector<int> indexes;
+
+    int element1;
+    int element2;
+
+    for(int i = 0; i < A.size() - 1; i++)
+    {
+        for(int j = 0; j <= i; j++)
+        {
+            mapa1.insert({A[j], 0});
+        }
+        for(int k = i + 1; k < A.size(); k++)
+        {
+            mapa2.insert({A[k], 0});
+        }
+
+        for(int a = 0; a <= i; a++)
+        {
+            mapa1[A[a]] += 1;
+        }
+
+        for(int b = i + 1; b < A.size(); b++)
+        {
+            mapa2[A[b]] += 1;
+        }
+
+        int maxValue1 = 0;
+        int maxValue2 = 0;
+
+        for (const auto& pair : mapa1) 
+        {
+            if (pair.second > maxValue1) 
+            {
+                maxValue1 = pair.second;
+                element1 = pair.first;
+            }
+        }
+
+        for (const auto& pair : mapa2) 
+        {
+            if (pair.second > maxValue2) 
+            {
+                maxValue2 = pair.second;
+                element2 = pair.first;
+            }
+        }
+
+        if(element1 == A[i] && element2 == A[i])
+        {
+            indexes.push_back(i);
+        }
+
+        mapa1.clear();
+        mapa2.clear();
+    }
+    
+    return indexes.size();
+}
