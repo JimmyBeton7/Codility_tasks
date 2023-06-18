@@ -57,7 +57,10 @@ int solution(vector<int> &A)
 
         if(element1 == A[i] && element2 == A[i])
         {
-            indexes.push_back(i);
+            if(maxValue1 > i/2 && maxValue2 > (A.size() - (i+1)) / 2)
+            {
+                indexes.push_back(i);
+            }  
         }
 
         mapa1.clear();
