@@ -1,0 +1,13 @@
+int solution(vector<int> &A) 
+{
+    int maxEnding = A[0];
+    int maxSlice = A[0];
+
+    for(int i = 1; i < A.size(); i++)
+    {
+        maxEnding = max(A[i], maxEnding + A[i]);
+        maxSlice = max(maxSlice, maxEnding);
+    }
+
+    return maxSlice;
+}
