@@ -1,0 +1,25 @@
+#include <vector>
+
+int solution(int N, int M) 
+{
+    int eaten = 0;
+
+    vector<int>chocolate;
+
+    for(int i = 0; i < N; i++)
+    {
+        chocolate.push_back(1);
+    }
+
+    int x = 0;
+    while(chocolate[x] != 0)
+    {
+        chocolate[x] = 0;
+        eaten++;
+        x = (x + M) % N;
+    }
+
+    return eaten;
+}
+
+//---------------------------------------------------------
