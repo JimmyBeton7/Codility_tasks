@@ -55,3 +55,72 @@ vector<int> solution(int N, vector<int> &P, vector<int> &Q)
 
 //--------------------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------------------
+
+#include<vector>
+
+int CountSemiprimesInRange(vector<int> &S, int P, int Q)
+{
+    int amount = 0;
+
+    for(int i = 0; i < S.size(); i++)
+    {
+        if(S[i] >= P && S[i] <= Q)
+        {
+            amount++;
+        }
+    }
+
+    return amount;
+}
+
+vector<int> solution(int N, vector<int> &P, vector<int> &Q) 
+{
+    //--------------------------------------------
+    //SIEVE:
+    bool tab[N + 1];
+    int n = N + 1;
+    vector<int>primes;
+    vector<int>semiprimes;
+    vector<int>amounts;
+
+    for(int i = 0; i < n; i++)
+    {
+        tab[i] = true;
+    }
+
+    for(int i = 2; i * i <= n; i++)
+    {
+        if(tab[i] == true)
+        {
+            for(int j = 2 * i; j < n; j += i)
+            {
+                tab[j] = false;
+            }         
+        }          
+    }
+        
+    for(int i = 2; i < n; i++)
+    {
+        if(tab[i] == true)
+        {
+            primes.push_back(i);
+        }
+    }
+  //---------------------------------------------   
+    for(int i = 0; i < primes.size(); i++)
+    {
+        for(int j = i; j < primes.size(); j++)
+        {
+            semiprimes.push_back(primes[i] * primes[j]);
+        }
+    }
+  //---------------------------------------------
+
+    for(int i = 0; i < P.size(); i++)
+    {
+        amounts.push_back(CountSemiprimesInRange(semiprimes, P[i], Q[i]));
+    }
+
+    return amounts;
+
+}
