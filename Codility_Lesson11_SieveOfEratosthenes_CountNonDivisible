@@ -1,0 +1,22 @@
+#include <vector>
+
+vector<int> solution(vector<int> &A) 
+{
+    vector<int>amounts;
+
+    for(int i = 0; i < A.size(); i++)
+    {
+        int amount = 0;
+        for(int j = 0; j < A.size(); j++)
+        {
+            if(A[i] % A[j] != 0)
+            {
+                amount++;
+            }
+        }
+        amounts.push_back(amount);
+        amount = 0;
+    } 
+
+    return amounts;  
+}
