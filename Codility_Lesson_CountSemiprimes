@@ -1,0 +1,57 @@
+#include <vector>
+
+bool IfPrime(int n)
+{
+	  if(n < 2)
+    {
+        return false;
+    }	
+	for(int i = 2; i*i <= n; i++)
+    {
+        if(n%i==0)
+        {
+            return false;
+        }		
+    }		
+	return true;
+}
+
+int Factor(int n)
+{
+	for(int i = 2; i*i <= n; i++)
+    {
+        if(n % i == 0)
+        {
+            return i;
+        }	
+    }	
+	return n;
+}
+
+int AmountOfSemiPrime(int P, int Q)
+{
+    int amount = 0;
+	for(int i = P; i <= Q; i++)
+	{
+		if(IfPrime(i/Factor(i)))
+        {
+            amount++;
+        }
+	}
+    return amount;
+}
+
+vector<int> solution(int N, vector<int> &P, vector<int> &Q) 
+{
+    vector<int>amounts;
+
+    for(int i = 0; i < P.size(); i++)
+    {
+        amounts.push_back(AmountOfSemiPrime(P[i], Q[i]));
+    }
+
+    return amounts;
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------
