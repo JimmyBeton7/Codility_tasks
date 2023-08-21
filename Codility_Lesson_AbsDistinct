@@ -1,0 +1,23 @@
+#include <algorithm>
+#include <vector>
+#include <unordered_set>
+
+int solution(vector<int> &A) 
+{
+    unordered_set<int> count;
+
+    for(int i = 0; i < A.size(); i++)
+    {
+        if(A[i] < 0)
+        {
+            A[i] = abs(A[i]);
+        }
+    }
+
+    for(int i = 0; i < A.size(); i++)
+    {
+        count.insert(A[i]);
+    }
+
+    return count.size();
+}
