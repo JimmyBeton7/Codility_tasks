@@ -1,0 +1,32 @@
+#include <vector>
+#include <unordered_set>
+
+int solution(int M, vector<int> &A) 
+{
+    int N = A.size();
+    std::unordered_set<int> distinct;
+    long long distinct_slices = 0;
+    int start = 0, end = 0;
+
+    while (start < N && end < N) 
+    {
+        if (distinct.find(A[end]) == distinct.end()) 
+        {
+            distinct_slices += (end - start + 1);
+            distinct.insert(A[end]);
+            end++;
+        } else 
+        {
+
+            distinct.erase(A[start]);
+            start++;
+        }
+
+        if (distinct_slices > 1000000000) 
+        {
+            return 1000000000;
+        }
+    }
+
+    return distinct_slices;
+}
